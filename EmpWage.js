@@ -1,5 +1,5 @@
 //UC1
-  
+
 console.log("Welcome to Employee Wage Javascript")
 
 //UC1--> IF-ELSE, checking empkoyee is present or absent
