@@ -1,19 +1,55 @@
-//UC11 A - UC11 D
-    let totalWages = empDailyHrsAndWageArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage >0)
-                                            .reduce((totalWage,dailyHrsAndWage)=> totalWage+= dailyHrsAndWage.dailyWage,0);
-    console.log("Total wage UC11A - "+totalWages);
-    let totalHours = empDailyHrsAndWageArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours >0)
-                                            .reduce((totalHours,dailyHrsAndWage)=>totalHours+= dailyHrsAndWage.dailyHours,0);
-    console.log("Total hours UC11A - "+totalHours); 
-    console.log("11B- Logging Full Work Days");
-    empDailyHrsAndWageArray.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHours == 8).
-                            forEach(dailyHrsAndWage=>process.stdout.write(dailyHrsAndWage.toString()));
-    
-    let partWorkingDaysString = empDailyHrsAndWageArray.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHours==4)
-                                                        .map(dailyHrsAndWage=>dailyHrsAndWage.toString());
-    console.log("\n11C- Part Working Days"+partWorkingDaysString);
+//UC12 
 
-    let noWorkingDays = empDailyHrsAndWageArray.filter(dailyHrsAndWage=>dailyHrsAndWage.dailyHours==0)
-                                                .map(dailyHrsAndWage=>dailyHrsAndWage.dayNum);
-    console.log("11D- Non working days: "+noWorkingDays);
+class EmployeePayrollData {
+    //property
+    id;
+    salary;
+    gender;
+    startDate;
+    //constructor
+    constructor(...params) {
+        this.id = params[0];
+        this.name = params[1];
+        this.salary = params[2];
+        this.gender = params[3];
+        this.startDate = params[4];
+    }
+    get name() {
+        return this._name;
+    }
+    set name(name) {
+        this._name = name;
+    }
+
+    tostring() {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const empDate =
+            this.startDate == undefined
+                ? "undefined"
+                : this.startDate.toLocaleDateString("en-US", options);
+        return (
+            "id: " +
+            this.id +
+            " name: " +
+            this.name +
+            " salary : " +
+            this.salary +
+            " gender : " +
+            this.gender +
+            " startdate : " +
+            this.startDate
+        );
+    }
 }
+let employeePayrollData = new EmployeePayrollData(1, "Puma", 60000);
+console.log(employeePayrollData.tostring());
+employeePayrollData.name = "Nike";
+console.log(employeePayrollData.tostring());
+let newEmployeePayrollData = new EmployeePayrollData(
+    1,
+    "Puma",
+    60000,
+    "F",
+    new Date()
+);
+console.log(newEmployeePayrollData.tostring());
