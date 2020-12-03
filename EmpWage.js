@@ -1,4 +1,4 @@
-//UC12 
+//UC13
 
 class EmployeePayrollData {
     //property
@@ -6,6 +6,7 @@ class EmployeePayrollData {
     salary;
     gender;
     startDate;
+
     //constructor
     constructor(...params) {
         this.id = params[0];
@@ -18,7 +19,9 @@ class EmployeePayrollData {
         return this._name;
     }
     set name(name) {
-        this._name = name;
+        let nameRegex = RegExp("^[A-Z]{1}[a-z]{3,}$");
+        if (nameRegex.test(name)) this._name = name;
+        else throw "Name is incorrect";
     }
 
     tostring() {
@@ -41,15 +44,19 @@ class EmployeePayrollData {
         );
     }
 }
-let employeePayrollData = new EmployeePayrollData(1, "Puma", 60000);
-console.log(employeePayrollData.tostring());
-employeePayrollData.name = "Nike";
-console.log(employeePayrollData.tostring());
-let newEmployeePayrollData = new EmployeePayrollData(
-    1,
-    "Puma",
-    60000,
-    "F",
-    new Date()
-);
-console.log(newEmployeePayrollData.tostring());
+try {
+    let employeePayrollData = new EmployeePayrollData(1, "Jack", 60000);
+    console.log(employeePayrollData.tostring());
+    employeePayrollData.name = "Maddy";
+    console.log(employeePayrollData.tostring());
+    let newEmployeePayrollData = new EmployeePayrollData(
+        1,
+        "Liha",
+        60000,
+        "F",
+        new Date()
+    );
+    console.log(newEmployeePayrollData.tostring());
+} catch (e) {
+    console.log(e);
+}
